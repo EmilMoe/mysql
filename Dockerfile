@@ -11,3 +11,4 @@ RUN apt-get update && apt-get -yq upgrade \
 EXPOSE 3306/tcp
 
 ENTRYPOINT /bin/sh /cmd.sh && /etc/init.d/mysql start && tail -f /mysql.log
+
