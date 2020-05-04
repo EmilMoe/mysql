@@ -6,7 +6,7 @@ ENV TZ=Europe/Copenhagen
 RUN apt-get update && apt-get -yq upgrade \
   && apt-get install -yq mysql-server \
   && mysql_secure_installation --use-default --password=123456 \
-  echo "" > /mysql.log
+  && echo "" > /mysql.log
   
 EXPOSE 3306/tcp
 
