@@ -6,15 +6,12 @@ ENV TZ=Europe/Copenhagen
 RUN apt-get update && apt-get -yq upgrade \
         && apt-get install -yq mariadb-server software-properties-common \
         && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+#        && { \
+#                echo "[mysqld]"; \
+#                echo "bind-address=127.0.0.1"; \
+#        } > /etc/mysql/conf.d/conf_01.cnf \
         && { \
-                echo "[mysqld]"; \
-                echo "bind-address=0.0.0.0"; \
-        } > /etc/mysql/conf.d/conf_01.cnf \
-        && { \
-                echo "UPDATE mysql.user SET authentication_string = PASSWORD('${MYSQL_PASSWORD}') WHERE User='root';"; \
-                echo "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';"; \
-                echo "DELETE FROM mysql.user WHERE User='';"; \
-                echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"; \
+		echo "ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '${MYSQL_PASSWORD}';"; \
                 echo "FLUSH PRIVILEGES;"; \
         } > /mysql-first-time \
         && chmod a+rx /mysql-first-time \
