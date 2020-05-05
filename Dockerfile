@@ -6,6 +6,7 @@ ENV TZ=Europe/Copenhagen
 RUN apt-get update && apt-get -yq upgrade \
         && apt-get install -yq mysql-server \
         && mkdir -p /var/run/mysqld \
+        && mkdir -p /var/log/mysql/ \
         && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
         && { \
                 echo "[mysqld]"; \
