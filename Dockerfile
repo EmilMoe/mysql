@@ -16,11 +16,11 @@ RUN apt-get install -yq mysql-server
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
 RUN ln -sf /dev/stdout /var/log/mysqld.err 
-RUN { \
-        echo "[mysqld]"; \
-        echo "bind-address=0.0.0.0"; \
-        echo "socket=/var/lib/mysql/mysql.sock"; \
-    } > /etc/mysql/conf.d/bind_0.0.0.0.cnf
+#RUN { \
+#        echo "[mysqld]"; \
+#        echo "bind-address=0.0.0.0"; \
+#        echo "socket=/var/lib/mysql/mysql.sock"; \
+#    } > /etc/mysql/conf.d/bind_0.0.0.0.cnf
     
 RUN { \
         echo "UPDATE mysql.user SET authentication_string = PASSWORD('123456') WHERE User='root';"; \
