@@ -8,6 +8,7 @@ RUN apt-get update && apt-get -yq upgrade \
   && mysql_secure_installation --use-default --password=123456 \
   && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
   && ln -sf /dev/stdout /var/log/mysqld.err \
+  && systemctl disable mysql \
   && { \
       echo "#!/usr/bin/env bash"; \
       echo "set -e"; \
