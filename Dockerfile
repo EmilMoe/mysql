@@ -24,7 +24,9 @@ RUN apt-get update && apt-get -yq upgrade \
                 echo "#!/usr/bin/env bash"; \
                 echo "set -e"; \
                 echo "if [ -n \"$MYSQL_PASSWORD\" ]; then"; \
-                echo "set -- \"$@\" --init-file=/mysql-first-time" \
+                echo "set -- \"$@\" --init-file=/mysql-first-time"; \
+                echo "else"; \
+                echo "rm /mysql-first-time"; \
                 echo "fi"; \
                 echo "rm -f /run/mysqld/mysqld.pid"; \
                 echo "exec /usr/bin/mysqld_safe \"\$@\""; \
