@@ -16,7 +16,7 @@ RUN apt-get update && apt-get -yq upgrade \
         echo "#!/usr/bin/env bash"; \
         echo "set -e"; \
         echo "rm -f /run/mysqld/mysqld.pid"; \
-        echo "/etc/init.d/mysql start"; \
+        echo "/usr/bin/mysqld_safe"; \
         echo "tail -f /empty.log"; \
     } > /usr/local/bin/entrypoint \
     && echo "" > /empty.log \
