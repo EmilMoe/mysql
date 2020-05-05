@@ -11,7 +11,7 @@ RUN apt-get update && apt-get -yq upgrade \
     && { \
         echo "[mysqld]"; \
 #        echo "bind-address=0.0.0.0"; \
-        echo "socket=/var/lib/mysql/mysql.sock" \
+        echo "socket=/var/lib/mysql/mysql.sock"; \
     } > /etc/mysql/conf.d/bind_0.0.0.0.cnf \
     && { \
         echo "#!/usr/bin/env bash"; \
