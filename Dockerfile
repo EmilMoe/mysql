@@ -32,8 +32,7 @@ RUN { \
         echo "rm /mysql-first-time"; \
         echo "fi"; \
         echo "rm -f /run/mysqld/mysqld.pid"; \
-        echo "/usr/bin/mysqld_safe"; \
-        echo "tail -f /dev/stdout"; \
+        echo "exec /usr/bin/mysqld_safe"; \
     } > /usr/local/bin/entrypoint
     
 RUN chmod a+rx /usr/local/bin/entrypoint
