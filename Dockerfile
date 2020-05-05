@@ -27,8 +27,8 @@ RUN apt-get update && apt-get -yq upgrade \
                 echo "./mysql-first-time"; \    
                 echo "rm /mysql-first-time"; \
                 echo "fi"; \
-                echo "rm -f /run/mysqld/mysqld.pid"; 
-                echo "exe c/usr/bin/mysqld_safe \"\$@\"";
+                echo "rm -f /run/mysqld/mysqld.pid"; \
+                echo "exe c/usr/bin/mysqld_safe \"\$@\""; \
         } > /usr/local/bin/entrypoint \
         && chmod a+rx /usr/local/bin/entrypoint \
         && apt-get -yq clean autoclean && apt-get -yq autoremove \
