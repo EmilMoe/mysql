@@ -17,8 +17,9 @@ RUN apt-get update && apt-get -yq upgrade \
         echo "set -e"; \
         echo "rm -f /run/mysqld/mysqld.pid"; \
         echo "/etc/init.d/mysql start"; \
-        echo "tail -f /dev/stdout"; \
+        echo "tail -f /empty.log"; \
     } > /usr/local/bin/entrypoint \
+    && echo "" > /empty.log \
     && chmod a+rx /usr/local/bin/entrypoint \
     && apt-get -yq clean autoclean && apt-get -yq autoremove \
     && rm -rf /var/lib/apt/lists/*
