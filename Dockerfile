@@ -15,6 +15,7 @@ RUN apt-get update && apt-get -yq upgrade \
 #                echo "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';"; \
 #                echo "DELETE FROM mysql.user WHERE User='';"; \
 #                echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"; \
+                echo "CREATE OR REPLACE 'dbadmin'@'%' IDENTIFIED BY '123456';"; \
                 echo "ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '${MYSQL_PASSWORD}';"; \
                 echo "FLUSH PRIVILEGES;"; \
         } > /mysql-first-time \
