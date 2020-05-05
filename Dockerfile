@@ -6,14 +6,6 @@ ENV TZ=Europe/Copenhagen
 RUN apt-get update && apt-get -yq upgrade
 RUN apt-get install -yq mysql-server
 RUN mkdir -p /var/run/mysqld
-#RUN { \
-#        echo "[mysql]"; \
-#        echo "password=123456"; \
-#} > passwordfile
-#RUN mysql_secure_installation --use-default --defaults-file=passwordfile
-
-#RUN echo "[mysql]\npassword=123456" > passwordfile && /bin/sh -c mysql_secure_installation --use-default --defaults-file=passwordfile
-#RUN mysql_secure_installation --use-default --password=123456
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN ln -sf /dev/stdout /var/log/mysqld.err
@@ -22,6 +14,15 @@ RUN { \
         echo "bind-address=0.0.0.0"; \
         echo "socket=/var/lib/mysql/mysql.sock"; \
     } > /etc/mysql/conf.d/bind_0.0.0.0.cnf
+
+#RUN { \
+#        echo "[mysql]"; \
+#        echo "password=123456"; \
+#} > passwordfile
+#RUN mysql_secure_installation --use-default --defaults-file=passwordfile
+
+#RUN echo "[mysql]\npassword=123456" > passwordfile && /bin/sh -c mysql_secure_installation --use-default --defaults-file=passwordfile
+#RUN mysql_secure_installation --use-default --password=123456
 
 RUN { \
         echo "UPDATE mysql.user SET authentication_string = PASSWORD('123456') WHERE User='root';"; \
@@ -32,7 +33,7 @@ RUN { \
 } > setup.sql
 
 RUN /usr/bin/mysqld_safe
-RUN mysql --user=root -h 127.0.0.1 < setup.sql
+RUN mysql --user=root < setup.sql
 
 
 RUN { \
