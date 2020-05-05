@@ -6,6 +6,7 @@ ENV TZ=Europe/Copenhagen
 RUN apt-get update && apt-get -yq upgrade \
         && apt-get install -yq mariadb-server software-properties-common \
         && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+        && sed -i -e 's/bind-address/# bind-address/g' /etc/mysql/mariadb.conf.d/50-server.cnf \
 #        && { \
 #                echo "[mysqld]"; \
 #                echo "bind-address=127.0.0.1"; \
