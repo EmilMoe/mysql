@@ -5,11 +5,11 @@ ENV TZ=Europe/Copenhagen
 
 RUN apt-get update && apt-get -yq upgrade
 RUN apt-get install -yq mysql-server
-RUN { \
-        echo "[mysql]"; \
-        echo "password=123456"; \
-} > passwordfile
-RUN mysql_secure_installation --use-default --defaults-file=passwordfile
+#RUN { \
+#        echo "[mysql]"; \
+#        echo "password=123456"; \
+#} > passwordfile
+#RUN mysql_secure_installation --use-default --defaults-file=passwordfile
 
 #RUN echo "[mysql]\npassword=123456" > passwordfile && /bin/sh -c mysql_secure_installation --use-default --defaults-file=passwordfile
 #RUN mysql_secure_installation --use-default --password=123456
