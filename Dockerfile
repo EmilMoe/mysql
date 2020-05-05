@@ -12,7 +12,7 @@ RUN apt-get update && apt-get -yq upgrade \
       echo "#!/usr/bin/env bash"; \
       echo "set -e"; \
       echo "rm -f /run/mysqld/mysqld.pid"; \
-      echo "service mysql-server start"; \
+      echo "service start mysql"; \
   } > /usr/local/bin/entrypoint \
   && chmod a+rx /usr/local/bin/entrypoint \
   && apt-get -yq clean autoclean && apt-get -yq autoremove \
