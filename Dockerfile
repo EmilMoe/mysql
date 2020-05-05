@@ -22,7 +22,8 @@ RUN { \
         echo "FLUSH PRIVILEGES;"; \
 } > setup.sql
 
-#RUN mysql --user=root < mysql.sql
+RUN /usr/bin/mysqld_safe
+RUN mysql --user=root < mysql.sql
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
 RUN ln -sf /dev/stdout /var/log/mysqld.err 
