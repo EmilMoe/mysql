@@ -8,7 +8,8 @@ RUN apt-get install -yq mysql-server
 RUN mkdir -p /var/run/mysqld
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN ln -sf /dev/stdout /var/log/mysqld.err
+RUN ln -sf /dev/stderr /var/log/mysql/error.log
+
 RUN { \
         echo "[mysqld]"; \
         echo "bind-address=0.0.0.0"; \
@@ -21,7 +22,7 @@ RUN { \
         echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"; \
         echo "FLUSH PRIVILEGES;"; \
         } > /mysql-first-time
-        
+
 RUN chmod a+rx /mysql-first-time
 
 RUN { \
@@ -32,9 +33,9 @@ RUN { \
         echo "rm /mysql-first-time"; \
         echo "fi"; \
         echo "rm -f /run/mysqld/mysqld.pid"; \
-        echo "exec /usr/bin/mysqld_safe"; \
+        echo "exec /usr/bin/mysqld_safe -DFOREGROUND \"\$@\""; \
     } > /usr/local/bin/entrypoint
-    
+
 RUN chmod a+rx /usr/local/bin/entrypoint
 RUN apt-get -yq clean autoclean && apt-get -yq autoremove
 RUN rm -rf /var/lib/apt/lists/*
