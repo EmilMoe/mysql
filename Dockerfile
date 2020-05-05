@@ -8,11 +8,11 @@ RUN apt-get install -yq mysql-server
 #RUN mysql_secure_installation --use-default --password=123456
 
 RUN { \
-        echo "UPDATE mysql.user SET authentication_string = PASSWORD('123456') WHERE User='root';" \
-        echo "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';" \
-        echo "DELETE FROM mysql.user WHERE User='';" \
-        echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');" \
-        echo "FLUSH PRIVILEGES;" \
+        echo "UPDATE mysql.user SET authentication_string = PASSWORD('123456') WHERE User='root';"; \
+        echo "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';"; \
+        echo "DELETE FROM mysql.user WHERE User='';"; \
+        echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"; \
+        echo "FLUSH PRIVILEGES;"; \
 } > mysql.sql
 
 RUN mysql --user=root < mysql.sql
