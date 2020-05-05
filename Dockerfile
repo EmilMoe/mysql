@@ -8,10 +8,11 @@ RUN apt-get update && apt-get -yq upgrade \
     && mysql_secure_installation --use-default --password=123456 \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 #    && ln -sf /dev/stdout /var/log/mysqld.err \
-#    && { \
-#        echo "[mysqld]"; \
+    && { \
+        echo "[mysqld]"; \
 #        echo "bind-address=0.0.0.0"; \
-#    && } > /etc/mysql/conf.d/bind_0.0.0.0.cnf \
+        echo "socket=/var/lib/mysql/mysql.sock" \
+    && } > /etc/mysql/conf.d/bind_0.0.0.0.cnf \
     && { \
         echo "#!/usr/bin/env bash"; \
         echo "set -e"; \
