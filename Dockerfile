@@ -5,7 +5,18 @@ ENV TZ=Europe/Copenhagen
 
 RUN apt-get update && apt-get -yq upgrade
 RUN apt-get install -yq mysql-server
-RUN mysql_secure_installation --use-default --password=123456
+#RUN mysql_secure_installation --use-default --password=123456
+
+RUN mysql --user=root <<_EOF_ \
+UPDATE mysql.user SET authentication_string = PASSWORD('123456') WHERE User='root'; \
+UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root'; \
+DELETE FROM mysql.user WHERE User=''; \
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); \
+FLUSH PRIVILEGES; \
+_EOF_
+
+
+
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
 RUN ln -sf /dev/stdout /var/log/mysqld.err 
 RUN { \
