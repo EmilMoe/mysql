@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Copenhagen
 
 RUN apt-get update && apt-get -yq upgrade \
-        && apt-get install -yq mysql-server \
+        && apt-get install -yq mariadb-server software-properties-common \
         && mkdir -p /var/run/mysqld \
         && mkdir -p /var/log/mysql/ \
         && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
