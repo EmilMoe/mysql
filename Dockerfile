@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -yq upgrade \
                 echo "bind-address=0.0.0.0"; \
             } > /etc/mysql/conf.d/conf_01.cnf \
         && { \
-                echo "UPDATE mysql.user SET authentication_string = PASSWORD('123456') WHERE User='root';"; \
+                echo "UPDATE mysql.user SET authentication_string = PASSWORD('${MYSQL_PASSWORD}') WHERE User='root';"; \
                 echo "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE User = 'root';"; \
                 echo "DELETE FROM mysql.user WHERE User='';"; \
                 echo "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"; \
