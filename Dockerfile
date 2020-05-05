@@ -7,7 +7,6 @@ RUN apt-get update && apt-get -yq upgrade \
         && apt-get install -yq mysql-server \
         && mkdir -p /var/run/mysqld \
         && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-        #&& ln -sf /dev/stderr /var/log/mysql/error.log \
         && { \
                 echo "[mysqld]"; \
                 echo "bind-address=0.0.0.0"; \
