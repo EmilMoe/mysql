@@ -33,9 +33,9 @@ RUN { \
         echo "fi"; \
         echo "rm -f /run/mysqld/mysqld.pid"; \
         echo "/usr/bin/mysqld_safe"; \
-        echo "tail -f /empty.log"; \
+        echo "tail -f /dev/stdout"; \
     } > /usr/local/bin/entrypoint
-RUN echo "" > /empty.log
+    
 RUN chmod a+rx /usr/local/bin/entrypoint
 RUN apt-get -yq clean autoclean && apt-get -yq autoremove
 RUN rm -rf /var/lib/apt/lists/*
