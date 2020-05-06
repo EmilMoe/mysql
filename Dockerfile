@@ -14,7 +14,7 @@ RUN apt-get update && apt-get -yq upgrade \
                 echo "set -e"; \
                 echo "if [[ -z \"$MYSQL_PASSWORD\" ]]; then"; \
                 echo "/etc/init.d/mysql start"; \
-                echo "mysql -u root -p$MYSQL_PASSWORD  -e \"GRANT ALL ON *.* TO root@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;\""; \
+                echo "mysql -u root -p${MYSQL_PASSWORD}  -e \"GRANT ALL ON *.* TO root@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;\""; \
                 echo "/etc/init.d/mysql stop"; \
                 echo "fi"; \
                 echo "rm -f /run/mysqld/mysqld.pid"; \
